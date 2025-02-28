@@ -432,14 +432,12 @@ class myHashMap<K, V> {
          * Make sure you return the proper value based on the outcome of this method's
          * replace (see method's prologue above).
          */
-        V oldVal = get(key);
-        if (oldVal == null) {
-            return null;
-        }
+
         int index = getBucketIndex(key);
         HashNode<K, V> head = bucket.get(index);
         while (head != null) {
             if (head.key.equals(key)) {
+                V oldVal = head.value;
                 head.value = val;
                 return oldVal;
             }
@@ -473,6 +471,11 @@ class myHashMap<K, V> {
          * the
          * value 'oldval', and is so, it SHOULD call replace(K, V) for code reuse.
          */
+        V currentVal = get(key);
+        if (currentVal != null && currentVal.equals(oldVal)) {
+            replace(key, newVal);
+            return true;
+        }
 
         return false;
     }
