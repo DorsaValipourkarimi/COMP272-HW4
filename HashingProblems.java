@@ -121,11 +121,19 @@ class HashingProblems {
 
   public int twoSums(int[] numbers, int k) {
 
-      /*
-       * ADD YOUR CODE HERE
-       */
+      HashSet<Integer> s = new HashSet<>();
+      int count = 0;
+      for(int num : numbers){
+        if(s.contains(num - k)){
+            count ++;
+        }
+        if(s.contains(num+k)){
+            count++;
+        }
+        s.add(num);
+      }
 
-      return -1;
+      return count;
   }
 
 } /* end class HashingProblems */
