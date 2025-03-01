@@ -230,7 +230,6 @@ class myHashMap<K, V> {
      */
 
     public V remove(K key) {
-
         /*
          * ADD YOUR CODE HERE
          *
@@ -242,23 +241,39 @@ class myHashMap<K, V> {
          * correct
          * return value is returned the invoking function based on the remove outcome.
          */
+
+        // Find the bucket index for the given key
         int index = getBucketIndex(key);
+
+        // Get the first node in the bucket
         HashNode<K, V> head = bucket.get(index);
+
+        // Keep track of the previous node
         HashNode<K, V> lastNode = null;
+
+        // Traverse the linked list at this bucket
         while (head != null) {
+            // If the key is found, remove the node
             if (head.key.equals(key)) {
+                // If it's the first node, update the bucket
                 if (lastNode == null) {
                     bucket.set(index, head.next);
                 } else {
+                    // Otherwise, skip the current node
                     lastNode.next = head.next;
                 }
-                size--;
-                return head.value;
+                size--; // Reduce the size
+                return head.value; // Return the removed value
             }
+
+            // Move to the next node
             lastNode = head;
             head = head.next;
         }
+
+        // Return null if the key was not found
         return null;
+
     }
 
     /**
