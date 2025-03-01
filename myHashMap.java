@@ -448,17 +448,26 @@ class myHashMap<K, V> {
          * replace (see method's prologue above).
          */
 
+        // Get the bucket index for the given key
         int index = getBucketIndex(key);
+
+        // Get the first node in the bucket
         HashNode<K, V> head = bucket.get(index);
+
+        // Traverse the linked list at this bucket
         while (head != null) {
+            // If the key is found, update its value
             if (head.key.equals(key)) {
-                V oldVal = head.value;
-                head.value = val;
-                return oldVal;
+                V oldVal = head.value; // Store the old value
+                head.value = val; // Update to the new value
+                return oldVal; // Return the old value
             }
-            head = head.next;
+            head = head.next; // Move to the next node
         }
+
+        // Return null if the key was not found
         return null;
+
     }
 
     /**
@@ -486,13 +495,20 @@ class myHashMap<K, V> {
          * the
          * value 'oldval', and is so, it SHOULD call replace(K, V) for code reuse.
          */
+
+        // Get the current value associated with the key
         V currentVal = get(key);
+
+        // Check if the key exists and its value matches oldVal
         if (currentVal != null && currentVal.equals(oldVal)) {
+            // Replace the old value with the new value
             replace(key, newVal);
-            return true;
+            return true; // Return true to indicate a successful update
         }
 
+        // Return false if the key doesn't exist or the value doesn't match
         return false;
+
     }
 
     /**
